@@ -1,0 +1,34 @@
+{
+  "name": "tdd",
+  "version": "1.0.0",
+  "description": "a simple rest api for the purpose of training TDD and Jest knowledge",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Emanuel-Andrade/startingWithJest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Emanuel-Andrade/startingWithJest/issues"
+  },
+  "homepage": "https://github.com/Emanuel-Andrade/startingWithJest#readme",
+  "dependencies": {
+    "@types/jest": "^28.1.3",
+    "dotenv": "^16.0.1",
+    "jest": "^28.1.1",
+    "supertest": "^6.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  }
+}
