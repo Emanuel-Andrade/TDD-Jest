@@ -2,7 +2,7 @@ const User = require('../models/Users');
 const Validator = require('../validators/Validator');
 
 class UserController {
-  async login(req, res) {
+  home(req, res) {
     res.json({ message: 'ok' });
   }
 
@@ -18,6 +18,14 @@ class UserController {
     const hash = Validator.createHash(password);
     // create new user and return
     const user = User.create({ name, email, password: hash });
+    return res.json({ errors: null, user });
+  }
+
+  async login(req, res) {
+    const { email, password } = req.body;
+
+    const user = await Validator.loginUser(email, password);
+    if (user.errors) return res.status(400).json({ errors: user.errors[0] });
     return res.json({ errors: null, user });
   }
 }
