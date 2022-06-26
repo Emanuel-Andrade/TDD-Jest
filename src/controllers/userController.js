@@ -28,6 +28,23 @@ class UserController {
     if (user.errors) return res.status(400).json({ errors: user.errors[0] });
     return res.json({ errors: null, user });
   }
+
+  async delete(req, res) {
+    const { id } = req.params;
+    console.log(id);
+    try {
+      const user = User.findById(id);
+      if (!user) return res.status(404).json({ errors: ['Usuário não encontrado'] });
+      try {
+        await User.findOneAndRemove(id);
+        return res.json({ errors: null, message: ['Usuário excluído com sucesso'] });
+      } catch (error) {
+        return console.log(error.message);
+      }
+    } catch (error) {
+      return console.log(error.message);
+    }
+  }
 }
 
 module.exports = new UserController();

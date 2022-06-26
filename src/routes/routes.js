@@ -7,5 +7,6 @@ const Router = app.Router();
 Router.get('/', User.home);
 Router.post('/user', User.create);
 Router.post('/login', User.login);
+Router.delete('/user/:id', User.delete);
 
 module.exports = Router;
