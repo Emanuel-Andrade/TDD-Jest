@@ -1,2 +1,2 @@
 # startingWithJest
-a simple rest api for the purpose of training TDD and Jest knowledge
+a simple rest CRUD for the purpose of training TDD and Jest knowledge
