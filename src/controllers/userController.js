@@ -31,7 +31,6 @@ class UserController {
 
   async delete(req, res) {
     const { id } = req.params;
-    console.log(id);
     try {
       const user = User.findById(id);
       if (!user) return res.status(404).json({ errors: ['Usuário não encontrado'] });
@@ -41,6 +40,22 @@ class UserController {
       } catch (error) {
         return console.log(error.message);
       }
+    } catch (error) {
+      return console.log(error.message);
+    }
+  }
+
+  async update(req, res) {
+    const { name, email, password } = req.body;
+    const { id } = req.params;
+    const user = await Validator.updateUser(id, email, name, password);
+    if (user.errors == 'Usuário não encontrado') return res.status(404).json({ errors: user.errors });
+    if (user.errors) return res.status(400).json({ errors: user.errors });
+    try {
+      let hash;
+      if (password) hash = Validator.createHash(password);
+      const updatedUser = await User.findByIdAndUpdate(id, ({ name, password: hash }));
+      return res.json({ errors: null, user: updatedUser });
     } catch (error) {
       return console.log(error.message);
     }

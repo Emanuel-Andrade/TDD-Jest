@@ -37,6 +37,28 @@ class Validate {
     }
   }
 
+  async updateUser(id, email, name, password) {
+    if (!id || id == ' ') return { errors: ['Usuário não encontrado'] };
+    if (!email || email == ' ') return { errors: ['Usuário não encontrado'] };
+    if (name && name.length < 2) return { errors: ['Nome deve conter no mínimo dois caracteres'] };
+    if (password && password.length < 6) return { errors: ['Senha deve conter no mínimo seis caracteres'] };
+
+    try {
+      const user = await User.findById(id);
+      if (!user) return { errors: ['Usuário não encontrado'] };
+      try {
+        const userByEmail = await User.find({ email });
+        if (!userByEmail) return { errors: ['Usuário não encontrado'] };
+        if (!user._id.equals(userByEmail[0]._id)) return { errors: ['Apenas o usuário pode fazer edições'] };
+        return { errors: null, user };
+      } catch (error) {
+        return { errors: error.message };
+      }
+    } catch (error) {
+      return { errors: error.message };
+    }
+  }
+
   createHash(password) {
     const hash = bcrypt.hashSync(password, 8);
     return hash;
